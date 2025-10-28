@@ -8,6 +8,15 @@ terraform {
     }
   }
 }
+
+backend "s3" {
+  bucket = "your-terraform-state-bucket"
+  key = "vpc/terraform.tfstate"
+  region = "ap-south-1"
+  encrypt = true
+  dynamodddb_table = "terraform-state-lock"
+}
+
 provider "aws" {
     region = var.aws_region
 
